@@ -1,8 +1,5 @@
 package campusboy.com.daggerplusmvp.module;
 
-import android.app.Activity;
-import android.content.Context;
-
 import campusboy.com.daggerplusmvp.view.IView;
 import dagger.Module;
 import dagger.Provides;
@@ -12,21 +9,14 @@ import dagger.Provides;
  */
 
 @Module
-public class ActivityModule {
+public class UserPresenterModule {
 
-    private Activity activity;
     private String userName;
     private IView view;
 
-    public ActivityModule(Activity activity, String userName, IView view) {
-        this.activity = activity;
+    public UserPresenterModule(String userName, IView view) {
         this.userName = userName;
         this.view = view;
-    }
-
-    @Provides
-    Context provideContext() {
-        return activity;
     }
 
     @Provides

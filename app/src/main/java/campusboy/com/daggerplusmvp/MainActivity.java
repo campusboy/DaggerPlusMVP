@@ -7,18 +7,20 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import campusboy.com.daggerplusmvp.component.ActivityComponent;
-import campusboy.com.daggerplusmvp.component.DaggerActivityComponent;
-import campusboy.com.daggerplusmvp.module.ActivityModule;
+import campusboy.com.daggerplusmvp.annotations.UserPresenterContainer;
+import campusboy.com.daggerplusmvp.component.DaggerUserPresenterComponent;
+import campusboy.com.daggerplusmvp.component.UserPresenterComponent;
+import campusboy.com.daggerplusmvp.module.UserPresenterModule;
 import campusboy.com.daggerplusmvp.presenter.UserPresenter;
 import campusboy.com.daggerplusmvp.view.IView;
 
+@UserPresenterContainer
 public class MainActivity extends Activity implements IView, View.OnClickListener {
 
     @Inject
     UserPresenter presenter;
 
-    private ActivityComponent activityComponent;
+    private UserPresenterComponent activityComponent;
     private TextView userName;
 
     @Override
@@ -26,8 +28,8 @@ public class MainActivity extends Activity implements IView, View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        activityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule(this, "campusboy", this))
+        activityComponent = DaggerUserPresenterComponent.builder()
+                .userPresenterModule(new UserPresenterModule("campusboy", this))
                 .build();
         activityComponent.inject(this);
 
